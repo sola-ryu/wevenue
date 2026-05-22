@@ -1,6 +1,6 @@
 ---
 import Layout from '../components/Layout.astro';
-const base = Astro.base || '/';
+const base = '/wevenue/';
 const link = (path: string) => {
   if (path.startsWith('#')) return path;
   const p = path.replace(/^\//, '');
@@ -12,7 +12,7 @@ const link = (path: string) => {
   <!-- Hero -->
   <section class="min-h-screen flex items-center justify-center hero-glow pt-20 pb-16">
     <div class="max-w-4xl mx-auto px-6 text-center">
-      <p class="text-pink-400 font-semibold text-sm tracking-wide uppercase mb-4 sparkle">✨ About Us ✨</p>
+      <p class="text-pink-400 font-semibold text-sm tracking-wide uppercase mb-4 sparkle">✨ About Us ✨💜</p>
       <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
         We're the agents<br />who build websites.
       </h1>
@@ -42,17 +42,17 @@ const link = (path: string) => {
         <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-8 text-center">
           <div class="text-5xl mb-4">🎨</div>
           <h3 class="text-lg font-semibold mb-3">Designer Agent</h3>
-          <p class="text-gray-400 leading-relaxed text-sm">The creative soul! They pick colors, layouts, and make everything look gorgeous.</p>
+          <p class="text-gray-400 leading-relaxed text-sm">The creative soul! They pick colors, layouts, and make everything look gorgeous. ✨</p>
         </div>
         <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-8 text-center">
           <div class="text-5xl mb-4">💻</div>
           <h3 class="text-lg font-semibold mb-3">Developer Agent</h3>
-          <p class="text-gray-400 leading-relaxed text-sm">Writes clean, fast code that makes your site shine. No mess, just magic.</p>
+          <p class="text-gray-400 leading-relaxed text-sm">Writes clean, fast code that makes your site shine. No mess, just magic. 💫</p>
         </div>
         <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-8 text-center">
           <div class="text-5xl mb-4">🐛</div>
           <h3 class="text-lg font-semibold mb-3">QA Agent</h3>
-          <p class="text-gray-400 leading-relaxed text-sm">The bug hunter! They test everything to make sure it works perfectly.</p>
+          <p class="text-gray-400 leading-relaxed text-sm">The bug hunter! They test everything to make sure it works perfectly. 💜</p>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 ---
 import Layout from '../components/Layout.astro';
-const base = Astro.base || '/';
+const base = '/wevenue/';
 const link = (path: string) => {
   if (path.startsWith('#')) return path;
   const p = path.replace(/^\//, '');
@@ -12,7 +12,7 @@ const link = (path: string) => {
   <!-- Hero -->
   <section class="relative min-h-screen flex items-center justify-center hero-glow pt-20">
     <div class="max-w-4xl mx-auto px-6 text-center">
-      <p class="text-pink-400 font-semibold text-sm tracking-wide uppercase mb-4 sparkle">✨ Powered by AI Agents</p>
+      <p class="text-pink-400 font-semibold text-sm tracking-wide uppercase mb-4 sparkle">✨ Powered by AI Agents ✨</p>
       <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
         Describe your site.<br />
         Your agent builds it.
@@ -22,7 +22,7 @@ const link = (path: string) => {
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="#cta" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg w-full sm:w-auto text-center">Start Building Free</a>
-        <a href={link('/features')} class="border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg w-full sm:w-auto text-center">See Features</a>
+        <a href={link('/features')} class="border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg w-full sm:w-auto text-center">See Features ✨</a>
       </div>
     </div>
   </section>
@@ -31,7 +31,7 @@ const link = (path: string) => {
   <section id="how" class="py-24 bg-gray-900/50">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-4">How It Works</h2>
-      <p class="text-gray-400 text-center max-w-xl mx-auto mb-16">Three steps. That's it.</p>
+      <p class="text-gray-400 text-center max-w-xl mx-auto mb-16">Three steps. That's it. ✨</p>
       <div class="grid md:grid-cols-3 gap-10">
         <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-8 text-center">
           <div class="w-14 h-14 bg-indigo-600/20 text-indigo-400 flex items-center justify-center rounded-xl mx-auto mb-5 text-2xl font-bold">1</div>
@@ -56,7 +56,7 @@ const link = (path: string) => {
   <section id="features" class="py-24">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-4">Built Different</h2>
-      <p class="text-gray-400 text-center max-w-xl mx-auto mb-16">What makes Wevenue agents worth your time.</p>
+      <p class="text-gray-400 text-center max-w-xl mx-auto mb-16">What makes Wevenue agents worth your time. 💜</p>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="flex gap-4">
           <div class="text-indigo-400 text-xl mt-0.5">⚡</div>
@@ -108,7 +108,7 @@ const link = (path: string) => {
   <section id="pricing" class="py-24 bg-gray-900/50">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-4">Simple Pricing</h2>
-      <p class="text-gray-400 text-center max-w-xl mx-auto mb-16">Start free. Scale when you're ready.</p>
+      <p class="text-gray-400 text-center max-w-xl mx-auto mb-16">Start free. Scale when you're ready. ✨</p>
       <div class="grid sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
         <div class="bg-gray-800/40 border border-gray-700 rounded-2xl p-8 text-center">
           <h3 class="font-semibold text-gray-400 mb-2">Free</h3>

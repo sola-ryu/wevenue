@@ -1,6 +1,6 @@
 ---
 import Layout from '../components/Layout.astro';
-const base = Astro.base || '/';
+const base = '/wevenue/';
 const link = (path: string) => {
   if (path.startsWith('#')) return path;
   const p = path.replace(/^\//, '');
@@ -30,7 +30,7 @@ const link = (path: string) => {
         <div class="bg-gray-800/40 border border-gray-700 rounded-2xl p-8 text-center hover:border-gray-500 transition-all duration-300 hover:-translate-y-1">
           <h3 class="font-semibold text-gray-400 mb-2">Free</h3>
           <p class="text-4xl font-extrabold mb-1">$0</p>
-          <p class="text-gray-500 text-sm mb-6">Forever! No tricks.</p>
+          <p class="text-gray-500 text-sm mb-6">Forever! No tricks. 💜</p>
           <ul class="text-sm text-gray-400 space-y-3 mb-8 text-left">
             <li class="flex gap-2"><span class="text-green-400">✓</span> 1 site to play with</li>
             <li class="flex gap-2"><span class="text-green-400">✓</span> GitHub Pages deploy</li>
@@ -100,8 +100,8 @@ const link = (path: string) => {
   <!-- CTA -->
   <section class="py-20 bg-gray-900/50">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Ready to start building?</h2>
-      <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">Join the waitlist and let our agents make your dreams come true.</p>
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Ready to start building? ✨</h2>
+      <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">Join the waitlist and let our agents make your dreams come true. 💫</p>
       <a href={link('/')} class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg">Join the Waitlist</a>
     </div>
   </section>
