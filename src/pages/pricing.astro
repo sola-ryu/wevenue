@@ -1,0 +1,102 @@
+---
+import Layout from '../components/Layout.astro';
+---
+
+<Layout title="Pricing — Wevenue">
+  <!-- Hero -->
+  <section class="min-h-screen flex items-center justify-center hero-glow pt-20 pb-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <p class="text-pink-400 font-semibold text-sm tracking-wide uppercase mb-4 sparkle">✨ Pricing ✨</p>
+      <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+        Simple pricing.<br />Start free, grow with us.
+      </h1>
+      <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+        No hidden fees, no surprises! Just choose the plan that fits you and start building.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <section class="py-20 bg-gray-900/50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <!-- Free -->
+        <div class="bg-gray-800/40 border border-gray-700 rounded-2xl p-8 text-center hover:border-gray-500 transition-all duration-300 hover:-translate-y-1">
+          <h3 class="font-semibold text-gray-400 mb-2">Free</h3>
+          <p class="text-4xl font-extrabold mb-1">$0</p>
+          <p class="text-gray-500 text-sm mb-6">Forever! No tricks.</p>
+          <ul class="text-sm text-gray-400 space-y-3 mb-8 text-left">
+            <li class="flex gap-2"><span class="text-green-400">✓</span> 1 site to play with</li>
+            <li class="flex gap-2"><span class="text-green-400">✓</span> GitHub Pages deploy</li>
+            <li class="flex gap-2"><span class="text-green-400">✓</span> Basic agent support</li>
+            <li class="flex gap-2"><span class="text-green-400">✓</span> Community help</li>
+          </ul>
+          <a href="/" class="block border border-gray-600 hover:border-gray-400 text-gray-300 font-semibold py-2.5 rounded-lg transition">Get Started</a>
+        </div>
+        <!-- Pro -->
+        <div class="bg-indigo-600/10 border-2 border-indigo-500 rounded-2xl p-8 text-center relative hover:-translate-y-1 transition-all duration-300">
+          <p class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs font-semibold px-3 py-1 rounded-full sparkle">✨ Most Popular</p>
+          <h3 class="font-semibold text-indigo-400 mb-2">Pro</h3>
+          <p class="text-4xl font-extrabold mb-1">$19<span class="text-lg font-medium text-gray-400">/mo</span></p>
+          <p class="text-gray-500 text-sm mb-6">Billed monthly</p>
+          <ul class="text-sm text-gray-300 space-y-3 mb-8 text-left">
+            <li class="flex gap-2"><span class="text-indigo-400">✓</span> 10 sites</li>
+            <li class="flex gap-2"><span class="text-indigo-400">✓</span> Custom domains</li>
+            <li class="flex gap-2"><span class="text-indigo-400">✓</span> Multi-agent coordination</li>
+            <li class="flex gap-2"><span class="text-indigo-400">✓</span> Priority generation</li>
+            <li class="flex gap-2"><span class="text-indigo-400">✓</span> Analytics dashboard</li>
+          </ul>
+          <a href="/" class="block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 rounded-lg transition">Start Pro Trial</a>
+        </div>
+        <!-- Team -->
+        <div class="bg-gray-800/40 border border-gray-700 rounded-2xl p-8 text-center hover:border-gray-500 transition-all duration-300 hover:-translate-y-1">
+          <h3 class="font-semibold text-gray-400 mb-2">Team</h3>
+          <p class="text-4xl font-extrabold mb-1">$49<span class="text-lg font-medium text-gray-400">/mo</span></p>
+          <p class="text-gray-500 text-sm mb-6">Per workspace</p>
+          <ul class="text-sm text-gray-400 space-y-3 mb-8 text-left">
+            <li class="flex gap-2"><span class="text-green-400">✓</span> Unlimited sites</li>
+            <li class="flex gap-2"><span class="text-green-400">✓</span> Team collaboration</li>
+            <li class="flex gap-2"><span class="text-green-400">✓</span> Custom agent training</li>
+            <li class="flex gap-2"><span class="text-green-400">✓</span> API access</li>
+            <li class="flex gap-2"><span class="text-green-400">✓</span> Priority support</li>
+          </ul>
+          <a href="/" class="block border border-gray-600 hover:border-gray-400 text-gray-300 font-semibold py-2.5 rounded-lg transition">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-12">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-6">
+          <h3 class="font-semibold mb-2">Is the free plan really free?</h3>
+          <p class="text-gray-400 leading-relaxed text-sm">Yes! The free plan is forever free — no credit card, no trial, no tricks. Just a little site to get started.</p>
+        </div>
+        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-6">
+          <h3 class="font-semibold mb-2">Can I upgrade later?</h3>
+          <p class="text-gray-400 leading-relaxed text-sm">Of course! You can upgrade anytime. Your stuff stays safe and we'll help you move everything over — no hassle, promise!</p>
+        </div>
+        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-6">
+          <h3 class="font-semibold mb-2">What if I don't like it?</h3>
+          <p class="text-gray-400 leading-relaxed text-sm">No worries! You can cancel anytime with one click. We want you happy, not stuck. Plus the free plan is pretty great.</p>
+        </div>
+        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-6">
+          <h3 class="font-semibold mb-2">Do you offer discounts?</h3>
+          <p class="text-gray-400 leading-relaxed text-sm">Yep! Students and nonprofits get 50% off with a valid email. Just reach out to our team and we'll sort it out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-gray-900/50">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Ready to start building?</h2>
+      <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">Join the waitlist and let our agents make your dreams come true.</p>
+      <a href="/" class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg">Join the Waitlist</a>
+    </div>
+  </section>
+</Layout>
