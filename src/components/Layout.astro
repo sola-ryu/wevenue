@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const base = '/wevenue/';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -12,6 +13,11 @@ const navLinks = [
   { href: '/pricing', label: 'Pricing' },
   { href: '/demo', label: 'Demo' },
 ];
+
+function linkPath(href: string) {
+  const p = href.replace(/^\//, '');
+  return p ? `${base}${p}/` : base;
+}
 
 function isActive(pathname: string, href: string) {
   return pathname === href || (href !== '/' && pathname.startsWith(href));
@@ -30,13 +36,13 @@ function isActive(pathname: string, href: string) {
 <body class="bg-gray-950 text-white antialiased">
   <nav class="fixed top-0 w-full z-50 bg-gray-950/80 backdrop-blur border-b border-gray-800">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+      <a href={linkPath('/')} class="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
         Wevenue
       </a>
       <div class="hidden sm:flex items-center gap-8">
         {navLinks.map(link => (
           <a
-            href={link.href}
+            href={linkPath(link.href)}
             class={[
               'text-sm transition-colors',
               isActive(Astro.url.pathname, link.href) ? 'text-white font-semibold' : 'text-gray-400 hover:text-white',
@@ -46,7 +52,7 @@ function isActive(pathname: string, href: string) {
           </a>
         ))}
       </div>
-      <a href="/" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition">Get Started</a>
+      <a href={linkPath('/')} class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition">Get Started</a>
     </div>
   </nav>
 
@@ -59,7 +65,7 @@ function isActive(pathname: string, href: string) {
       <span>&copy; 2026 Wevenue. All rights reserved.</span>
       <div class="flex gap-6">
         {navLinks.map(link => (
-          <a href={link.href} class="hover:text-white transition">{link.label}</a>
+          <a href={linkPath(link.href)} class="hover:text-white transition">{link.label}</a>
         ))}
       </div>
     </div>

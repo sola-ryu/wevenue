@@ -1,0 +1,18 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href, ...rest } = Astro.props;
+const base = Astro.base || '/';
+
+let resolvedHref = href;
+if (href.startsWith('/') && !href.startsWith('//')) {
+  const p = href.replace(/^\//, '');
+  resolvedHref = p ? `${base}${p}/` : base;
+} else if (!href.startsWith('/')) {
+  resolvedHref = `${base}${href}`;
+}
+---
+
+<a href={resolvedHref} {...rest} />

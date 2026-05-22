@@ -1,5 +1,11 @@
 ---
 import Layout from '../components/Layout.astro';
+const base = Astro.base || '/';
+const link = (path: string) => {
+  if (path.startsWith('#')) return path;
+  const p = path.replace(/^\//, '');
+  return p ? `${base}${p}/` : base;
+};
 ---
 
 <Layout title="Features — Wevenue">
@@ -103,7 +109,7 @@ import Layout from '../components/Layout.astro';
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Sounds good? Let's go!</h2>
       <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">Join the waitlist and be first when Wevenue launches! No credit card required.</p>
-      <a href="/" class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg">Join the Waitlist</a>
+      <a href={link('/')} class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg">Join the Waitlist</a>
     </div>
   </section>
 </Layout>
