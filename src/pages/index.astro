@@ -6,12 +6,24 @@ const link = (path: string) => {
   const p = path.replace(/^\//, '');
   return p ? `${base}${p}/` : base;
 };
+
+// Funny example prompts for the typing animation
+const examples = [
+  "I want a portfolio for my cat photos",
+  "Build me a SaaS landing page but make it cute",
+  "A restaurant site with a menu that looks delicious",
+  "Personal blog about my gardening hobby",
+  "E-commerce store for handmade candles",
+  "A band website that doesn't look like 2003",
+  "Job board for weird jobs only",
+  "A site for my underground mushroom club",
+];
 ---
 
 <Layout title="Wevenue — AI Agent Website Builder">
   <!-- Hero -->
-  <section class="relative min-h-screen flex items-center justify-center hero-glow pt-20">
-    <div class="max-w-4xl mx-auto px-6 text-center">
+  <section class="relative min-h-screen flex items-center justify-center hero-glow pt-20 overflow-hidden">
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
       <p class="text-pink-400 font-semibold text-sm tracking-wide uppercase mb-4 sparkle">✨ Powered by AI Agents ✨</p>
       <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
         Describe your site.<br />
@@ -20,6 +32,22 @@ const link = (path: string) => {
       <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
         Wevenue's AI agents listen to what you need, design the pages, write the code, and deploy it — all from a single conversation. No drag-and-drop. No learning curves. Just results.
       </p>
+
+      <!-- Typing animation -->
+      <div class="max-w-xl mx-auto mb-10">
+        <div class="bg-gray-800/60 border border-gray-700 rounded-2xl p-5 text-left relative">
+          <div class="flex items-center gap-2 mb-3 pb-3 border-b border-gray-700/50">
+            <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+            <span class="text-xs text-gray-500 ml-2">try it — type whatever you want 👇</span>
+          </div>
+          <p class="text-gray-300 text-sm min-h-[1.75rem] font-mono">
+            <span id="typed-text"></span><span class="typing-cursor"></span>
+          </p>
+        </div>
+      </div>
+
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="#cta" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg w-full sm:w-auto text-center">Start Building Free</a>
         <a href={link('/features')} class="border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg w-full sm:w-auto text-center">See Features ✨</a>
@@ -28,22 +56,22 @@ const link = (path: string) => {
   </section>
 
   <!-- How It Works -->
-  <section id="how" class="py-24 bg-gray-900/50">
+  <section id="how" class="py-24 bg-gray-900/50 relative z-10">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-4">How It Works</h2>
       <p class="text-gray-400 text-center max-w-xl mx-auto mb-16">Three steps. That's it. ✨</p>
       <div class="grid md:grid-cols-3 gap-10">
-        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-8 text-center">
+        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-8 text-center agent-card">
           <div class="w-14 h-14 bg-indigo-600/20 text-indigo-400 flex items-center justify-center rounded-xl mx-auto mb-5 text-2xl font-bold">1</div>
           <h3 class="text-lg font-semibold mb-3">Describe Your Vision</h3>
           <p class="text-gray-400 leading-relaxed">Tell your agent what you need — a portfolio, a SaaS landing page, an e-commerce store. Just write like you'd explain to a friend.</p>
         </div>
-        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-8 text-center">
+        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-8 text-center agent-card">
           <div class="w-14 h-14 bg-purple-600/20 text-purple-400 flex items-center justify-center rounded-xl mx-auto mb-5 text-2xl font-bold">2</div>
           <h3 class="text-lg font-semibold mb-3">Agents Collaborate</h3>
           <p class="text-gray-400 leading-relaxed">Multiple AI agents work together — a designer, a developer, and a QA reviewer — to build your site in real time.</p>
         </div>
-        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-8 text-center">
+        <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-8 text-center agent-card">
           <div class="w-14 h-14 bg-pink-600/20 text-pink-400 flex items-center justify-center rounded-xl mx-auto mb-5 text-2xl font-bold">3</div>
           <h3 class="text-lg font-semibold mb-3">Deploy & Iterate</h3>
           <p class="text-gray-400 leading-relaxed">Your site goes live instantly. Need changes? Just ask. Your agent updates everything and redeploys in seconds.</p>
@@ -52,8 +80,51 @@ const link = (path: string) => {
     </div>
   </section>
 
+  <!-- Agent Personalities -->
+  <section class="py-24 relative z-10">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-4">Meet Your Agent Team</h2>
+      <p class="text-gray-400 text-center max-w-xl mx-auto mb-16">They may be AI, but they've got personality. 💜</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-800/50 border border-indigo-500/30 rounded-2xl p-8 agent-card text-center">
+          <div class="text-6xl mb-4">🎨</div>
+          <h3 class="text-lg font-semibold mb-1 text-indigo-400">Pixel</h3>
+          <p class="text-xs text-indigo-400/60 font-medium mb-4">Designer Agent</p>
+          <p class="text-gray-400 text-sm leading-relaxed">"I will make everything the right shade of purple. Do not test me. I have opinions about kerning."</p>
+          <div class="mt-4 flex justify-center gap-2 text-xs text-gray-500">
+            <span class="bg-indigo-500/10 px-2 py-1 rounded">colors</span>
+            <span class="bg-indigo-500/10 px-2 py-1 rounded">layout</span>
+            <span class="bg-indigo-500/10 px-2 py-1 rounded">vibes</span>
+          </div>
+        </div>
+        <div class="bg-gray-800/50 border border-purple-500/30 rounded-2xl p-8 agent-card text-center">
+          <div class="text-6xl mb-4">💻</div>
+          <h3 class="text-lg font-semibold mb-1 text-purple-400">Semicolon</h3>
+          <p class="text-xs text-purple-400/60 font-medium mb-4">Developer Agent</p>
+          <p class="text-gray-400 text-sm leading-relaxed">"Clean code isn't optional. It's a moral imperative. Also I will judge your variable names."</p>
+          <div class="mt-4 flex justify-center gap-2 text-xs text-gray-500">
+            <span class="bg-purple-500/10 px-2 py-1 rounded">HTML</span>
+            <span class="bg-purple-500/10 px-2 py-1 rounded">CSS</span>
+            <span class="bg-purple-500/10 px-2 py-1 rounded">JS</span>
+          </div>
+        </div>
+        <div class="bg-gray-800/50 border border-pink-500/30 rounded-2xl p-8 agent-card text-center">
+          <div class="text-6xl mb-4">🐛</div>
+          <h3 class="text-lg font-semibold mb-1 text-pink-400">Bugger</h3>
+          <p class="text-xs text-pink-400/60 font-medium mb-4">QA Agent</p>
+          <p class="text-gray-400 text-sm leading-relaxed">"I found 3 bugs in the code I just wrote. That's what I do. It's not personal. ...It is personal."</p>
+          <div class="mt-4 flex justify-center gap-2 text-xs text-gray-500">
+            <span class="bg-pink-500/10 px-2 py-1 rounded">testing</span>
+            <span class="bg-pink-500/10 px-2 py-1 rounded">accessibility</span>
+            <span class="bg-pink-500/10 px-2 py-1 rounded">snark</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
-  <section id="features" class="py-24">
+  <section id="features" class="py-24 bg-gray-900/50 relative z-10">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-4">Built Different</h2>
       <p class="text-gray-400 text-center max-w-xl mx-auto mb-16">What makes Wevenue agents worth your time. 💜</p>
@@ -105,12 +176,12 @@ const link = (path: string) => {
   </section>
 
   <!-- Pricing -->
-  <section id="pricing" class="py-24 bg-gray-900/50">
+  <section id="pricing" class="py-24 relative z-10">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl sm:text-4xl font-extrabold text-center mb-4">Simple Pricing</h2>
       <p class="text-gray-400 text-center max-w-xl mx-auto mb-16">Start free. Scale when you're ready. ✨</p>
       <div class="grid sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
-        <div class="bg-gray-800/40 border border-gray-700 rounded-2xl p-8 text-center">
+        <div class="bg-gray-800/40 border border-gray-700 rounded-2xl p-8 text-center agent-card">
           <h3 class="font-semibold text-gray-400 mb-2">Free</h3>
           <p class="text-4xl font-extrabold mb-1">$0</p>
           <p class="text-gray-500 text-sm mb-6">Forever</p>
@@ -121,7 +192,7 @@ const link = (path: string) => {
           </ul>
           <a href={link('/')} class="block border border-gray-600 hover:border-gray-400 text-gray-300 font-semibold py-2.5 rounded-lg transition">Get Started</a>
         </div>
-        <div class="bg-indigo-600/10 border-2 border-indigo-500 rounded-2xl p-8 text-center relative">
+        <div class="bg-indigo-600/10 border-2 border-indigo-500 rounded-2xl p-8 text-center relative agent-card">
           <p class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs font-semibold px-3 py-1 rounded-full sparkle">Popular</p>
           <h3 class="font-semibold text-indigo-400 mb-2">Pro</h3>
           <p class="text-4xl font-extrabold mb-1">$19<span class="text-lg font-medium text-gray-400">/mo</span></p>
@@ -134,7 +205,7 @@ const link = (path: string) => {
           </ul>
           <a href={link('/')} class="block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 rounded-lg transition">Start Pro Trial</a>
         </div>
-        <div class="bg-gray-800/40 border border-gray-700 rounded-2xl p-8 text-center">
+        <div class="bg-gray-800/40 border border-gray-700 rounded-2xl p-8 text-center agent-card">
           <h3 class="font-semibold text-gray-400 mb-2">Team</h3>
           <p class="text-4xl font-extrabold mb-1">$49<span class="text-lg font-medium text-gray-400">/mo</span></p>
           <p class="text-gray-500 text-sm mb-6">Per workspace</p>
@@ -151,7 +222,7 @@ const link = (path: string) => {
   </section>
 
   <!-- CTA -->
-  <section id="cta" class="py-24">
+  <section id="cta" class="py-24 bg-gray-900/50 relative z-10">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Ready to Build Something?</h2>
       <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">Join the waitlist and be first when Wevenue launches. No credit card required.</p>
@@ -161,4 +232,41 @@ const link = (path: string) => {
       </form>
     </div>
   </section>
+
+  <script>
+    // Typing animation for example prompts
+    const el = document.getElementById('typed-text');
+    if (el) {
+      let exIdx = 0;
+      let chIdx = 0;
+      let deleting = false;
+      const speed = 55;
+      const deleteSpeed = 30;
+      const pause = 2500;
+
+      function type() {
+        const text = examples[exIdx];
+        if (!deleting) {
+          el.textContent = text.substring(0, chIdx + 1);
+          chIdx++;
+          if (chIdx === text.length) {
+            setTimeout(() => { deleting = true; type(); }, pause);
+            return;
+          }
+          setTimeout(type, speed);
+        } else {
+          el.textContent = text.substring(0, chIdx - 1);
+          chIdx--;
+          if (chIdx === 0) {
+            deleting = false;
+            exIdx = (exIdx + 1) % examples.length;
+            setTimeout(type, 400);
+            return;
+          }
+          setTimeout(type, deleteSpeed);
+        }
+      }
+      setTimeout(type, 1000);
+    }
+  </script>
 </Layout>

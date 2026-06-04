@@ -14,6 +14,8 @@ const navLinks = [
   { href: '/demo', label: 'Demo' },
 ];
 
+const emojiBunch = ['✨', '💜', '🌸', '🎀', '💫', '⭐', '🦋', '🍄'];
+
 function linkPath(href: string) {
   const p = href.replace(/^\//, '');
   return p ? `${base}${p}/` : base;
@@ -34,6 +36,9 @@ function isActive(pathname: string, href: string) {
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-950 text-white antialiased">
+  <!-- Floating emoji particles -->
+  <div id="emoji-particles" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
   <nav class="fixed top-0 w-full z-50 bg-gray-950/80 backdrop-blur border-b border-gray-800">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href={linkPath('/')} class="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
@@ -70,5 +75,43 @@ function isActive(pathname: string, href: string) {
       </div>
     </div>
   </footer>
-</body>
+
+  <script>
+    // Floating emoji particles
+    const container = document.getElementById('emoji-particles');
+    const emojis = {emojiBunch};
+    function spawnEmoji() {
+      const el = document.createElement('span');
+      el.className = 'emoji-particle';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+      el.style.animationDuration = (6 + Math.random() * 6) + 's';
+      container?.appendChild(el);
+      setTimeout(() => el.remove(), 12000);
+    }
+    // Spawn one every 800ms
+    setInterval(spawnEmoji, 800);
+    // Burst on load
+    for (let i = 0; i < 5; i++) setTimeout(spawnEmoji, i * 200);
+
+    // Konami code Easter egg 🎮
+    const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let kIdx = 0;
+    document.addEventListener('keydown', (e) => {
+      if (e.key === konami[kIdx]) {
+        kIdx++;
+        if (kIdx === konami.length) {
+          kIdx = 0;
+          document.body.classList.toggle('konami-mode');
+          // Confetti burst
+          for (let i = 0; i < 30; i++) {
+            setTimeout(spawnEmoji, i * 50);
+          }
+        }
+      } else {
+        kIdx = 0;
+      }
+    });
+  </script>
 </html>
