@@ -99,7 +99,7 @@ const faqs = [
   </section>
 
   <script>
-    function toggleFaq(btn) {
+    window.toggleFaq = function(btn) {
       const answer = btn.nextElementSibling;
       const chevron = btn.querySelector('.faq-chevron');
       const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
