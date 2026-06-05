@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 interface Props {
   title: string;
 }
@@ -38,9 +40,9 @@ function isActive(pathname: string, href: string) {
   <!-- Floating emoji particles -->
   <div id="emoji-particles" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
-  <nav class="fixed top-0 w-full z-50 bg-gray-950/80 backdrop-blur border-b border-gray-800">
+  <nav class="fixed top-0 w-full z-50 bg-gray-950/80 backdrop-blur-sm border-b border-gray-800">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href={linkPath('/')} class="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+      <a href={linkPath('/')} class="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">
         Wevenue
       </a>
       <!-- Desktop nav -->
@@ -68,7 +70,7 @@ function isActive(pathname: string, href: string) {
       </div>
     </div>
     <!-- Mobile menu -->
-    <div id="mobile-menu" class="sm:hidden max-h-0 overflow-hidden transition-all duration-300 bg-gray-950/95 backdrop-blur border-b border-gray-800">
+    <div id="mobile-menu" class="sm:hidden max-h-0 overflow-hidden transition-all duration-300 bg-gray-950/95 backdrop-blur-sm border-b border-gray-800">
       <div class="px-6 py-4 space-y-3">
         {navLinks.map(link => (
           <a

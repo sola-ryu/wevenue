@@ -15,7 +15,7 @@ const link = (path: string) => {
   <section class="relative min-h-screen flex items-center justify-center hero-glow pt-20 overflow-hidden">
     <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
       <p class="text-pink-400 font-semibold text-sm tracking-wide uppercase mb-4 sparkle">✨ Powered by AI Agents ✨</p>
-      <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+      <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight tracking-tight mb-6 bg-clip-text text-transparent bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">
         Describe your site.<br />
         Your agent builds it.
       </h1>
@@ -32,7 +32,7 @@ const link = (path: string) => {
             <div class="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
             <span class="text-xs text-gray-500 ml-2">try it — type whatever you want 👇</span>
           </div>
-          <p class="text-gray-300 text-sm min-h-[1.75rem] font-mono">
+          <p class="text-gray-300 text-sm min-h-7 font-mono">
             <span id="typed-text"></span><span class="typing-cursor"></span>
           </p>
         </div>
@@ -82,9 +82,9 @@ const link = (path: string) => {
           <p class="text-xs text-indigo-400/60 font-medium mb-4">Designer Agent</p>
           <p class="text-gray-400 text-sm leading-relaxed">"I will make everything the right shade of purple. Do not test me. I have opinions about kerning."</p>
           <div class="mt-4 flex justify-center gap-2 text-xs text-gray-500">
-            <span class="bg-indigo-500/10 px-2 py-1 rounded">colors</span>
-            <span class="bg-indigo-500/10 px-2 py-1 rounded">layout</span>
-            <span class="bg-indigo-500/10 px-2 py-1 rounded">vibes</span>
+            <span class="bg-indigo-500/10 px-2 py-1 rounded-sm">colors</span>
+            <span class="bg-indigo-500/10 px-2 py-1 rounded-sm">layout</span>
+            <span class="bg-indigo-500/10 px-2 py-1 rounded-sm">vibes</span>
           </div>
         </div>
         <div class="bg-gray-800/50 border border-purple-500/30 rounded-2xl p-8 agent-card text-center">
@@ -93,9 +93,9 @@ const link = (path: string) => {
           <p class="text-xs text-purple-400/60 font-medium mb-4">Developer Agent</p>
           <p class="text-gray-400 text-sm leading-relaxed">"Clean code isn't optional. It's a moral imperative. Also I will judge your variable names."</p>
           <div class="mt-4 flex justify-center gap-2 text-xs text-gray-500">
-            <span class="bg-purple-500/10 px-2 py-1 rounded">HTML</span>
-            <span class="bg-purple-500/10 px-2 py-1 rounded">CSS</span>
-            <span class="bg-purple-500/10 px-2 py-1 rounded">JS</span>
+            <span class="bg-purple-500/10 px-2 py-1 rounded-sm">HTML</span>
+            <span class="bg-purple-500/10 px-2 py-1 rounded-sm">CSS</span>
+            <span class="bg-purple-500/10 px-2 py-1 rounded-sm">JS</span>
           </div>
         </div>
         <div class="bg-gray-800/50 border border-pink-500/30 rounded-2xl p-8 agent-card text-center">
@@ -104,9 +104,9 @@ const link = (path: string) => {
           <p class="text-xs text-pink-400/60 font-medium mb-4">QA Agent</p>
           <p class="text-gray-400 text-sm leading-relaxed">"I found 3 bugs in the code I just wrote. That's what I do. It's not personal. ...It is personal."</p>
           <div class="mt-4 flex justify-center gap-2 text-xs text-gray-500">
-            <span class="bg-pink-500/10 px-2 py-1 rounded">testing</span>
-            <span class="bg-pink-500/10 px-2 py-1 rounded">accessibility</span>
-            <span class="bg-pink-500/10 px-2 py-1 rounded">snark</span>
+            <span class="bg-pink-500/10 px-2 py-1 rounded-sm">testing</span>
+            <span class="bg-pink-500/10 px-2 py-1 rounded-sm">accessibility</span>
+            <span class="bg-pink-500/10 px-2 py-1 rounded-sm">snark</span>
           </div>
         </div>
       </div>
@@ -217,7 +217,7 @@ const link = (path: string) => {
       <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Ready to Build Something?</h2>
       <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">Join the waitlist and be first when Wevenue launches. No credit card required.</p>
       <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault(); this.querySelector('button').textContent='You\'re in! ✓'; this.querySelector('input').value='';">
-        <input type="email" placeholder="you@email.com" required class="flex-1 bg-gray-800 border border-gray-700 text-white px-5 py-3.5 rounded-xl focus:outline-none focus:border-indigo-500 placeholder-gray-500">
+        <input type="email" placeholder="you@email.com" required class="flex-1 bg-gray-800 border border-gray-700 text-white px-5 py-3.5 rounded-xl focus:outline-hidden focus:border-indigo-500 placeholder-gray-500">
         <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition whitespace-nowrap">Join Waitlist</button>
       </form>
     </div>
