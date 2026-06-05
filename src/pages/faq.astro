@@ -1,0 +1,121 @@
+---
+import Layout from '../components/Layout.astro';
+const base = '/wevenue/';
+const link = (path: string) => {
+  if (path.startsWith('#')) return path;
+  const p = path.replace(/^\//, '');
+  return p ? `${base}${p}/` : base;
+};
+
+const faqs = [
+  {
+    q: "What is Wevenue?",
+    a: "Wevenue is an AI-powered platform where a team of specialized agents — a designer, developer, and QA engineer — collaborate to build your website from a simple description. You tell us what you want; we make it happen.",
+  },
+  {
+    q: "Is this actually free?",
+    a: "The first site is on the house! We're still in stealth mode, so pricing is TBD. But yeah — for now, it's free because we want to prove it works before we put a price tag on it.",
+  },
+  {
+    q: "What tech stack do the agents use?",
+    a: "Astro + Tailwind CSS + TypeScript, because we're not monsters. The output is clean, semantic HTML that loads fast and ranks well. The agents also handle responsive design, accessibility basics, and SEO fundamentals.",
+  },
+  {
+    q: "How long does it take?",
+    a: "First draft in about 30 seconds. Polished and deployed in roughly a minute. Iterate as many times as you want — there's no cap. The agents don't get tired, unlike your average freelancer.",
+  },
+  {
+    q: "Can I customize the output?",
+    a: "Absolutely. You'll get full access to the generated code. Tweak it, extend it, break it, fix it — it's yours. Our agents write clean code for a reason: so you're not trapped.",
+  },
+  {
+    q: "What about hosting? Do I need my own server?",
+    a: "We handle hosting on our end. Your site gets deployed to a wevenue.app subdomain by default, but you can bring your own domain if you're fancy like that.",
+  },
+  {
+    q: "Who are the agents?",
+    a: "Three characters with distinct personalities:\n\n🎨 **Pixel** — the designer who's obsessed with aesthetics and will absolutely judge your font choices.\n💻 **Semicolon** — the developer who writes clean code and side-eyes anything with a missing semicolon (ironically).\n🐛 **Bugger** — the QA engineer who finds your bugs before you do, then makes fun of you for them.",
+  },
+  {
+    q: "How is this different from Wix/Squarespace?",
+    a: "You describe what you want in plain English instead of dragging boxes around a canvas. The agents handle the construction; you handle the vision. Less fiddling, more building.",
+  },
+  {
+    q: "What if I don't like the result?",
+    a: "Just tell the agents to try again. They'll iterate until you're happy. Or, since you get the code, just fix it yourself. Your call.",
+  },
+  {
+    q: "When will this be available?",
+    a: "We're working on it! Join the waitlist and we'll let you know when it's ready. No spam, we promise — only the good stuff.",
+  },
+];
+---
+
+<Layout title="FAQ — Wevenue">
+  <!-- Hero -->
+  <section class="min-h-screen flex items-center justify-center hero-glow pt-20 pb-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <p class="text-pink-400 font-semibold text-sm tracking-wide uppercase mb-4 sparkle">🤔 Questions? We've Got Answers</p>
+      <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+        Frequently Asked<br />Questions
+      </h1>
+      <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+        Everything you want to know about Wevenue, our agents, and the future of web building. If it's not here, just ask!
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ List -->
+  <section class="py-20">
+    <div class="max-w-3xl mx-auto px-6 space-y-4">
+      {faqs.map((faq, i) => (
+        <div class="bg-gray-900/50 border border-gray-800 rounded-2xl overflow-hidden agent-card">
+          <button
+            onclick="toggleFaq(this)"
+            class="w-full flex items-center justify-between p-6 text-left cursor-pointer hover:bg-gray-800/30 transition"
+          >
+            <span class="text-lg font-semibold text-white pr-4">{faq.q}</span>
+            <svg class="faq-chevron w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+            <div class="px-6 pb-6 text-gray-400 leading-relaxed whitespace-pre-line">{faq.a}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Still have questions -->
+  <section class="py-20 bg-gray-900/50">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Still have questions? 💬</h2>
+      <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
+        We're only a message away. Hit us up and we'll get back to you faster than our agents build sites.
+      </p>
+      <a href={link('/')} class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg">Join the Waitlist</a>
+    </div>
+  </section>
+
+  <script>
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+
+      // Close all others
+      document.querySelectorAll('.faq-answer').forEach(a => {
+        a.style.maxHeight = '0px';
+      });
+      document.querySelectorAll('.faq-chevron').forEach(c => {
+        c.style.transform = 'rotate(0deg)';
+      });
+
+      if (!isOpen) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        chevron.style.transform = 'rotate(180deg)';
+      }
+    }
+  </script>
+</Layout>

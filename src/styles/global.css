@@ -37,10 +37,10 @@
 }
 
 @keyframes floatUp {
-  0% { opacity: 0; transform: translateY(100vh) rotate(0deg); }
+  0% { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
   10% { opacity: 0.6; }
   90% { opacity: 0.4; }
-  100% { opacity: 0; transform: translateY(-100px) rotate(360deg); }
+  100% { opacity: 0; transform: translateY(-120vh) translateX(var(--drift, 30px)) rotate(360deg); }
 }
 
 /* Typing cursor blink */

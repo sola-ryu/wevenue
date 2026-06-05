@@ -12,6 +12,7 @@ const navLinks = [
   { href: '/features', label: 'Features' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/demo', label: 'Demo' },
+  { href: '/faq', label: 'FAQ' },
 ];
 
 function linkPath(href: string) {
@@ -42,6 +43,7 @@ function isActive(pathname: string, href: string) {
       <a href={linkPath('/')} class="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
         Wevenue
       </a>
+      <!-- Desktop nav -->
       <div class="hidden sm:flex items-center gap-8">
         {navLinks.map(link => (
           <a
@@ -55,7 +57,33 @@ function isActive(pathname: string, href: string) {
           </a>
         ))}
       </div>
-      <a href={linkPath('/')} class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition">Get Started</a>
+      <div class="flex items-center gap-4">
+        <a href={linkPath('/')} class="hidden sm:inline-block bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition">Get Started</a>
+        <!-- Mobile hamburger -->
+        <button id="mobile-menu-btn" class="sm:hidden flex flex-col gap-1.5 p-1">
+          <span class="w-6 h-0.5 bg-white transition-transform duration-300 origin-center"></span>
+          <span class="w-6 h-0.5 bg-white transition-opacity duration-300"></span>
+          <span class="w-6 h-0.5 bg-white transition-transform duration-300 origin-center"></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="sm:hidden max-h-0 overflow-hidden transition-all duration-300 bg-gray-950/95 backdrop-blur border-b border-gray-800">
+      <div class="px-6 py-4 space-y-3">
+        {navLinks.map(link => (
+          <a
+            href={linkPath(link.href)}
+            onclick="closeMobileMenu()"
+            class={[
+              'block text-sm transition-colors py-2',
+              isActive(Astro.url.pathname, link.href) ? 'text-white font-semibold' : 'text-gray-400 hover:text-white',
+            ].filter(Boolean).join(' ')}
+          >
+            {link.label}
+          </a>
+        ))}
+        <a href={linkPath('/')} onclick="closeMobileMenu()" class="block bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition text-center">Get Started</a>
+      </div>
     </div>
   </nav>
 
@@ -75,6 +103,39 @@ function isActive(pathname: string, href: string) {
   </footer>
 
   <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => {
+        menuOpen = !menuOpen;
+        mobileMenu.style.maxHeight = menuOpen ? mobileMenu.scrollHeight + 'px' : '0px';
+        const spans = menuBtn.querySelectorAll('span');
+        if (menuOpen) {
+          spans[0].style.transform = 'rotate(45deg) translateY(4px)';
+          spans[1].style.opacity = '0';
+          spans[2].style.transform = 'rotate(-45deg) translateY(-4px)';
+        } else {
+          spans[0].style.transform = '';
+          spans[1].style.opacity = '';
+          spans[2].style.transform = '';
+        }
+      });
+    }
+    window.closeMobileMenu = () => {
+      if (menuOpen) {
+        menuOpen = false;
+        mobileMenu.style.maxHeight = '0px';
+        const spans = menuBtn?.querySelectorAll('span');
+        if (spans) {
+          spans[0].style.transform = '';
+          spans[1].style.opacity = '';
+          spans[2].style.transform = '';
+        }
+      }
+    };
+
     // Floating emoji particles
     const container = document.getElementById('emoji-particles');
     const emojis = ['✨', '💜', '🌸', '🎀', '💫', '⭐', '🦋', '🍄'];
@@ -83,6 +144,8 @@ function isActive(pathname: string, href: string) {
       el.className = 'emoji-particle';
       el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       el.style.left = Math.random() * 100 + '%';
+      el.style.top = (20 + Math.random() * 60) + '%';
+      el.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
       el.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
       el.style.animationDuration = (6 + Math.random() * 6) + 's';
       container?.appendChild(el);
