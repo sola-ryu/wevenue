@@ -7,16 +7,7 @@ const link = (path: string) => {
   return p ? `${base}${p}/` : base;
 };
 
-// Chat messages with typing delay (ms) and display delay (ms)
-const chatMessages = [
-  { type: 'agent', text: "Hi there! 👋 I'm your Wevenue agent. Tell me what kind of site you'd like to build!", delay: 500 },
-  { type: 'user', text: "I want a portfolio site for my photography! Make it pretty with a dark theme.", delay: 1500 },
-  { type: 'agent', text: "Got it! A photography portfolio with a dark theme — love that combo. Let me think about this...", delay: 2000, thinking: true },
-  { type: 'agent', text: "🎨 Designer (Pixel): 'I'm going with deep navy backgrounds, gallery grid with hover zoom, and gold accent buttons.'", delay: 3500 },
-  { type: 'agent', text: "💻 Developer (Semicolon): 'Writing semantic HTML, CSS Grid for the gallery, lazy-loaded images. Clean code, no compromises.'", delay: 5000 },
-  { type: 'agent', text: "🐛 QA (Bugger): 'Found and fixed 2 issues. The contact form had a missing label. Noted. Moving on.'", delay: 6500 },
-  { type: 'agent', text: "All done! ✅ Your portfolio is live at your-photography.wevenue.app — check the preview below!", delay: 8000 },
-];
+
 ---
 
 <Layout title="Demo — Wevenue">
@@ -120,6 +111,17 @@ const chatMessages = [
   </section>
 
   <script>
+    // Chat messages with typing delay (ms) and display delay (ms)
+    const chatMessages = [
+      { type: 'agent', text: "Hi there! 👋 I'm your Wevenue agent. Tell me what kind of site you'd like to build!", delay: 500 },
+      { type: 'user', text: "I want a portfolio site for my photography! Make it pretty with a dark theme.", delay: 1500 },
+      { type: 'agent', text: "Got it! A photography portfolio with a dark theme — love that combo. Let me think about this...", delay: 2000, thinking: true },
+      { type: 'agent', text: "🎨 Designer (Pixel): 'I'm going with deep navy backgrounds, gallery grid with hover zoom, and gold accent buttons.'", delay: 3500 },
+      { type: 'agent', text: "💻 Developer (Semicolon): 'Writing semantic HTML, CSS Grid for the gallery, lazy-loaded images. Clean code, no compromises.'", delay: 5000 },
+      { type: 'agent', text: "🐛 QA (Bugger): 'Found and fixed 2 issues. The contact form had a missing label. Noted. Moving on.'", delay: 6500 },
+      { type: 'agent', text: "All done! ✅ Your portfolio is live at your-photography.wevenue.app — check the preview below!", delay: 8000 },
+    ];
+
     const chatContainer = document.getElementById('chat-messages');
     const overlay = document.getElementById('chat-overlay');
 

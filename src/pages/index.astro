@@ -7,17 +7,7 @@ const link = (path: string) => {
   return p ? `${base}${p}/` : base;
 };
 
-// Funny example prompts for the typing animation
-const examples = [
-  "I want a portfolio for my cat photos",
-  "Build me a SaaS landing page but make it cute",
-  "A restaurant site with a menu that looks delicious",
-  "Personal blog about my gardening hobby",
-  "E-commerce store for handmade candles",
-  "A band website that doesn't look like 2003",
-  "Job board for weird jobs only",
-  "A site for my underground mushroom club",
-];
+
 ---
 
 <Layout title="Wevenue — AI Agent Website Builder">
@@ -235,6 +225,16 @@ const examples = [
 
   <script>
     // Typing animation for example prompts
+    const examples = [
+      "I want a portfolio for my cat photos",
+      "Build me a SaaS landing page but make it cute",
+      "A restaurant site with a menu that looks delicious",
+      "Personal blog about my gardening hobby",
+      "E-commerce store for handmade candles",
+      "A band website that doesn't look like 2003",
+      "Job board for weird jobs only",
+      "A site for my underground mushroom club",
+    ];
     const el = document.getElementById('typed-text');
     if (el) {
       let exIdx = 0;

@@ -14,8 +14,6 @@ const navLinks = [
   { href: '/demo', label: 'Demo' },
 ];
 
-const emojiBunch = ['✨', '💜', '🌸', '🎀', '💫', '⭐', '🦋', '🍄'];
-
 function linkPath(href: string) {
   const p = href.replace(/^\//, '');
   return p ? `${base}${p}/` : base;
@@ -79,7 +77,7 @@ function isActive(pathname: string, href: string) {
   <script>
     // Floating emoji particles
     const container = document.getElementById('emoji-particles');
-    const emojis = {emojiBunch};
+    const emojis = ['✨', '💜', '🌸', '🎀', '💫', '⭐', '🦋', '🍄'];
     function spawnEmoji() {
       const el = document.createElement('span');
       el.className = 'emoji-particle';
