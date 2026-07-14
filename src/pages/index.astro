@@ -1,6 +1,6 @@
 ---
 import Layout from '../components/Layout.astro';
-const base = '/wevenue/';
+const base = '/';
 const link = (path: string) => {
   if (path.startsWith('#')) return path;
   const p = path.replace(/^\//, '');
@@ -322,8 +322,7 @@ const link = (path: string) => {
         output.classList.add('hidden');
 
         try {
-          const base = window.location.pathname.includes('/wevenue') ? '/wevenue' : '';
-          const res = await fetch(`${base}/api/generate`, {
+          const res = await fetch('/api/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ prompt }),

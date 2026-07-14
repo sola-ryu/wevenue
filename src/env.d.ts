@@ -4,6 +4,8 @@
 interface CloudflareBindings {
   DB: D1Database;
   wevenue: R2Bucket;
+  OPENWEBUI_URL: string;
+  OPENWEBUI_API_KEY: string;
 }
 
 interface ImportMetaEnv {

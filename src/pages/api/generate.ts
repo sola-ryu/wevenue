@@ -31,8 +31,8 @@ export const POST: APIRoute = async ({ request, platform }) => {
       return new Response(JSON.stringify({ error: 'Missing or invalid "prompt" field' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
 
-    const openwebuiUrl = import.meta.env.OPENWEBUI_URL || 'https://chat.xusix.com';
-    const apiKey = import.meta.env.OPENWEBUI_API_KEY;
+    const openwebuiUrl = platform?.env?.OPENWEBUI_URL || import.meta.env.OPENWEBUI_URL || 'https://chat.xusix.com';
+    const apiKey = platform?.env?.OPENWEBUI_API_KEY;
 
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
