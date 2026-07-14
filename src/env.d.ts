@@ -7,6 +7,8 @@ interface CloudflareBindings {
   OPENWEBUI_URL: string;
   OPENWEBUI_API_KEY: string;
   OPENWEBUI_MODEL: string;
+  LMSTUDIO_URL: string;
+  LMSTUDIO_MODEL: string;
 }
 
 interface ImportMetaEnv {

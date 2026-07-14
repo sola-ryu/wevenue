@@ -1,27 +1,25 @@
 import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
 
-const SYSTEM_PROMPT = `You are a website builder agent. Given a user's description, generate a complete, production-ready single-page website.
+const SYSTEM_PROMPT = `You are a website builder agent. Given a user's description, generate a complete, production-ready single-page website. Return the result as JSON matching the provided schema.`;
 
-Output format — return ONLY valid JSON with this structure:
-{
-  "title": "Page title",
-  "html": "<!DOCTYPE html>...complete HTML document...",
-  "css": "/* CSS styles */",
-  "js": "// JavaScript if needed"
-}
-
-Requirements:
-- Modern, clean design with Tailwind-like utility classes (but use inline <style> with custom CSS)
-- Fully responsive (mobile-first)
-- Dark theme by default unless the user requests otherwise
-- Semantic HTML5 structure
-- Include a nav, hero section, content sections, and footer
-- Use CSS gradients, subtle animations, and good typography
-- No external dependencies — all CSS/JS inline
-- Real, polished output — not placeholder lorem ipsum
-
-Return ONLY the JSON object. No markdown fences. No explanation.`;
+const SITE_SCHEMA = {
+  type: 'json_schema',
+  json_schema: {
+    name: 'site_response',
+    strict: 'true',
+    schema: {
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        html: { type: 'string' },
+        css: { type: 'string' },
+        js: { type: 'string' },
+      },
+      required: ['title', 'html', 'css', 'js'],
+    },
+  },
+};
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -32,18 +30,24 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Missing or invalid "prompt" field' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
 
-    const openwebuiUrl = env.OPENWEBUI_URL || import.meta.env.OPENWEBUI_URL || 'https://chat.xusix.com';
+    const lmstudioUrl = env.LMSTUDIO_URL;
+    const lmstudioModel = env.LMSTUDIO_MODEL;
+
+    const baseUrl = lmstudioUrl || env.OPENWEBUI_URL || import.meta.env.OPENWEBUI_URL || 'https://chat.xusix.com';
+    const model = lmstudioModel || env.OPENWEBUI_MODEL || 'qwen/qwen3.6-35b-a3b';
     const apiKey = env.OPENWEBUI_API_KEY;
-    const model = env.OPENWEBUI_MODEL || 'qwen/qwen3.6-35b-a3b';
+    const useLmstudio = !!lmstudioUrl;
 
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
     };
-    if (apiKey) {
+    if (!useLmstudio && apiKey) {
       headers['Authorization'] = `Bearer ${apiKey}`;
     }
 
-    const response = await fetch(`${openwebuiUrl}/api/v1/chat/completions`, {
+    const endpoint = useLmstudio ? `${baseUrl}/v1/chat/completions` : `${baseUrl}/api/v1/chat/completions`;
+
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers,
       body: JSON.stringify({
@@ -52,6 +56,7 @@ export const POST: APIRoute = async ({ request }) => {
           { role: 'system', content: SYSTEM_PROMPT },
           { role: 'user', content: prompt },
         ],
+        response_format: SITE_SCHEMA,
         stream: true,
         max_tokens: 12000,
       }),
@@ -59,7 +64,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (!response.ok) {
       const text = await response.text();
-      console.error(`Open WebUI error: ${response.status} ${text.slice(0, 500)}`);
+      console.error(`LLM error: ${response.status} ${text.slice(0, 500)}`);
       return new Response(JSON.stringify({ error: `AI service unavailable (${response.status})` }), { status: 502, headers: { 'Content-Type': 'application/json' } });
     }
 
