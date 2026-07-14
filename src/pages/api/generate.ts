@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 
 const SYSTEM_PROMPT = `You are a website builder agent. Given a user's description, generate a complete, production-ready single-page website.
 
@@ -22,7 +23,7 @@ Requirements:
 
 Return ONLY the JSON object. No markdown fences. No explanation.`;
 
-export const POST: APIRoute = async ({ request, platform }) => {
+export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
     const { prompt } = body as { prompt?: string };
@@ -31,8 +32,12 @@ export const POST: APIRoute = async ({ request, platform }) => {
       return new Response(JSON.stringify({ error: 'Missing or invalid "prompt" field' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
 
-    const openwebuiUrl = platform?.env?.OPENWEBUI_URL || import.meta.env.OPENWEBUI_URL || 'https://chat.xusix.com';
-    const apiKey = platform?.env?.OPENWEBUI_API_KEY;
+    const openwebuiUrl = env.OPENWEBUI_URL || import.meta.env.OPENWEBUI_URL || 'https://chat.xusix.com';
+    const apiKey = env.OPENWEBUI_API_KEY;
+
+    console.log('DEBUG: env keys:', env ? Object.keys(env) : 'no env');
+    console.log('DEBUG: apiKey present:', !!apiKey, 'length:', apiKey?.length ?? 0);
+    console.log('DEBUG: openwebuiUrl:', openwebuiUrl);
 
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
@@ -85,9 +90,9 @@ export const POST: APIRoute = async ({ request, platform }) => {
       };
     }
 
-    if (platform?.DB) {
+    if (env?.DB) {
       try {
-        await platform.DB.prepare(
+        await env.DB.prepare(
           'INSERT INTO sessions (prompt) VALUES (?)'
         ).run(prompt);
       } catch (dbErr) {
