@@ -52,7 +52,7 @@ export const POST: APIRoute = async ({ request }) => {
           { role: 'system', content: SYSTEM_PROMPT },
           { role: 'user', content: prompt },
         ],
-        stream: false,
+        stream: true,
         max_tokens: 12000,
       }),
     });
@@ -61,30 +61,6 @@ export const POST: APIRoute = async ({ request }) => {
       const text = await response.text();
       console.error(`Open WebUI error: ${response.status} ${text.slice(0, 500)}`);
       return new Response(JSON.stringify({ error: `AI service unavailable (${response.status})` }), { status: 502, headers: { 'Content-Type': 'application/json' } });
-    }
-
-    const data = await response.json();
-    const content = data?.choices?.[0]?.message?.content || data?.message?.content;
-
-    if (!content) {
-      return new Response(JSON.stringify({ error: 'Empty response from AI' }), { status: 502, headers: { 'Content-Type': 'application/json' } });
-    }
-
-    let parsed: { title?: string; html?: string; css?: string; js?: string };
-    try {
-      const cleaned = content
-        .replace(/^```(?:json)?\s*/m, '')
-        .replace(/\s*```$/m, '')
-        .trim();
-      parsed = JSON.parse(cleaned);
-    } catch (e) {
-      console.warn('AI response was not valid JSON, wrapping as-is');
-      parsed = {
-        title: 'Generated Site',
-        html: `<pre class="p-8 text-gray-300 font-mono whitespace-pre-wrap">${content.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`,
-        css: '',
-        js: '',
-      };
     }
 
     if (env?.DB) {
@@ -97,13 +73,13 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    return new Response(JSON.stringify({
-      title: parsed.title || 'Generated Site',
-      html: parsed.html || '',
-      css: parsed.css || '',
-      js: parsed.js || '',
-      code: parsed.html ? `<!-- ${parsed.title} -->\n${parsed.html}` : content,
-    }), { headers: { 'Content-Type': 'application/json' } });
+    return new Response(response.body, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      },
+    });
   } catch (err) {
     console.error('Generate error:', err);
     return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500, headers: { 'Content-Type': 'application/json' } });

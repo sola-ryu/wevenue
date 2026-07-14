@@ -333,8 +333,43 @@ const link = (path: string) => {
             throw new Error(err.error || `HTTP ${res.status}`);
           }
 
-          const data = await res.json();
-          codeEl.textContent = data.code;
+          if (!res.body) throw new Error('No response body');
+
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder();
+          let content = '';
+          let buffer = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+
+            const lines = buffer.split('\n');
+            buffer = lines.pop() || '';
+
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (!trimmed || !trimmed.startsWith('data:')) continue;
+              const data = trimmed.slice(5).trim();
+              if (data === '[DONE]') continue;
+              try {
+                const chunk = JSON.parse(data);
+                const delta = chunk.choices?.[0]?.delta?.content;
+                if (delta) content += delta;
+              } catch {}
+            }
+          }
+
+          let parsed;
+          try {
+            const cleaned = content.replace(/^```(?:json)?\s*/m, '').replace(/\s*```$/m, '').trim();
+            parsed = JSON.parse(cleaned);
+          } catch {
+            parsed = { code: content };
+          }
+
+          codeEl.textContent = parsed.code || `<!-- ${parsed.title} -->\n${parsed.html || content}`;
           output.classList.remove('hidden');
         } catch (err) {
           codeEl.textContent = `Error: ${err.message}`;
