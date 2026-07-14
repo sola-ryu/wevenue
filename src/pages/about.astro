@@ -1,0 +1,30 @@
+---
+import Layout from '../components/Layout.astro';
+---
+
+<Layout title="About — Wevenue">
+  <section class="min-h-screen pt-32 pb-24 flex items-center">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h1 class="text-5xl sm:text-7xl font-extrabold mb-8 bg-clip-text text-transparent bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">About</h1>
+
+      <div class="text-left space-y-6 text-gray-400 leading-relaxed text-lg">
+        <p>
+          Wevenue started as a joke — what if website builders didn't need drag-and-drop, templates, or learning curves? What if you just... told someone what you wanted?
+        </p>
+        <p>
+          Turns out, AI agents can do that. Not perfectly yet, but close enough to be exciting. We're building a tool where your website is built through conversation, not configuration panels.
+        </p>
+        <p>
+          The three agents (Pixel, Semicolon, Bugger) are personality-driven prompts for a single LLM — each one focuses on design, code quality, and testing respectively. In the future, they'll be more independent; for now, they're different lenses on the same model's capabilities.
+        </p>
+        <p class="text-gray-500 text-base">
+          Built with Astro + Cloudflare Workers + your local Open WebUI. Free to run, free to deploy. Because good tools shouldn't cost a fortune.
+        </p>
+      </div>
+
+      <div class="mt-12">
+        <a href="/" class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg">Back to Home</a>
+      </div>
+    </div>
+  </section>
+</Layout>

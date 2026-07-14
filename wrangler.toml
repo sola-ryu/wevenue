@@ -1,0 +1,17 @@
+name = "wevenue"
+compatibility_date = "2025-07-01"
+pages_build_output_dir = "dist"
+
+[vars]
+OPENWEBUI_URL = "https://chat.xusix.com"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "wevenue"
+database_id = "40cd560a-704e-40bf-a502-fb0bb09a5813"
+migrations_dir = "d1"
+
+[[r2_buckets]]
+# binding = "ASSETS_BUCKET"
+bucket_name = "wevenue"
+binding = "wevenue"

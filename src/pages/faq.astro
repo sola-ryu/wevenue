@@ -1,0 +1,67 @@
+---
+import Layout from '../components/Layout.astro';
+---
+
+<Layout title="FAQ — Wevenue">
+  <section class="min-h-screen pt-32 pb-24">
+    <div class="max-w-3xl mx-auto px-6">
+      <h1 class="text-5xl sm:text-7xl font-extrabold text-center mb-16 bg-clip-text text-transparent bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">FAQ</h1>
+
+      <div class="space-y-8">
+        <details class="bg-gray-800/40 border border-gray-700 rounded-2xl overflow-hidden group">
+          <summary class="p-6 cursor-pointer font-semibold text-lg hover:text-indigo-400 transition flex justify-between items-center">
+            How does the AI generation work?
+            <span class="text-gray-500 group-open:rotate-45 transition-transform text-2xl">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            You describe what you want in plain language. Our agent processes your request, generates a complete HTML/CSS/JS site, and returns it for you to preview or download. No templates — everything is generated fresh each time.
+          </div>
+        </details>
+
+        <details class="bg-gray-800/40 border border-gray-700 rounded-2xl overflow-hidden group">
+          <summary class="p-6 cursor-pointer font-semibold text-lg hover:text-indigo-400 transition flex justify-between items-center">
+            Can I use the generated code commercially?
+            <span class="text-gray-500 group-open:rotate-45 transition-transform text-2xl">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            Yes! The generated code is yours. No restrictions, no attribution required. Take it anywhere — deploy it yourself, modify it, whatever you want.
+          </div>
+        </details>
+
+        <details class="bg-gray-800/40 border border-gray-700 rounded-2xl overflow-hidden group">
+          <summary class="p-6 cursor-pointer font-semibold text-lg hover:text-indigo-400 transition flex justify-between items-center">
+            What's the difference between Free and Pro?
+            <span class="text-gray-500 group-open:rotate-45 transition-transform text-2xl">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            Free gets you one site with basic generation. Pro unlocks more sites, custom domains, multi-agent coordination (designer + developer + QA), and priority processing during high traffic.
+          </div>
+        </details>
+
+        <details class="bg-gray-800/40 border border-gray-700 rounded-2xl overflow-hidden group">
+          <summary class="p-6 cursor-pointer font-semibold text-lg hover:text-indigo-400 transition flex justify-between items-center">
+            Where can I deploy my site?
+            <span class="text-gray-500 group-open:rotate-45 transition-transform text-2xl">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            Anywhere. Wevenue outputs standard HTML/CSS/JS — it works on GitHub Pages, Netlify, Vercel, Cloudflare Pages, your own server, or a USB stick. We'll add one-click deploy options soon.
+          </div>
+        </details>
+
+        <details class="bg-gray-800/40 border border-gray-700 rounded-2xl overflow-hidden group">
+          <summary class="p-6 cursor-pointer font-semibold text-lg hover:text-indigo-400 transition flex justify-between items-center">
+            Is this a real product or just a parody?
+            <span class="text-gray-500 group-open:rotate-45 transition-transform text-2xl">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            It started as a parody of AI website builders, but the underlying tech is real. The generation actually works — it's just early and imperfect. We're building it out for real because the joke was too good to leave as a joke.
+          </div>
+        </details>
+      </div>
+
+      <div class="text-center mt-16">
+        <a href="/" class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg">Try It Now</a>
+      </div>
+    </div>
+  </section>
+</Layout>
