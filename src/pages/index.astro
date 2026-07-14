@@ -38,8 +38,41 @@ const link = (path: string) => {
         </div>
       </div>
 
+      <!-- App shell -->
+      <div class="max-w-2xl mx-auto mb-10">
+        <form id="app-form" class="flex flex-col gap-3">
+          <textarea
+            name="prompt"
+            rows="3"
+            placeholder="Describe the site you want to build..."
+            required
+            class="w-full bg-gray-800/60 border border-gray-700 text-white px-5 py-4 rounded-xl focus:outline-hidden focus:border-indigo-500 placeholder-gray-500 resize-none text-base"
+          ></textarea>
+          <button
+            type="submit"
+            class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg disabled:opacity-50 disabled:cursor-wait"
+          >
+            Build My Site ✨
+          </button>
+        </form>
+        <div id="app-status" class="hidden mt-4 text-center">
+          <p class="text-gray-400 text-sm animate-pulse">✨ Your agent is thinking...</p>
+        </div>
+        <div id="app-output" class="hidden mt-6">
+          <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 text-left">
+            <div class="flex items-center gap-2 mb-3 pb-3 border-b border-gray-700/50">
+              <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+              <span class="text-xs text-gray-500 ml-2">generated-site</span>
+            </div>
+            <pre id="app-code" class="text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap font-mono max-h-[400px] overflow-y-auto"></pre>
+          </div>
+        </div>
+      </div>
+
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#cta" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg w-full sm:w-auto text-center">Start Building Free</a>
+        <a href="#how" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg w-full sm:w-auto text-center">Start Building Free</a>
         <a href={link('/features')} class="border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition text-lg w-full sm:w-auto text-center">See Features ✨</a>
       </div>
     </div>
@@ -267,6 +300,51 @@ const link = (path: string) => {
         }
       }
       setTimeout(type, 1000);
+    }
+
+    // App form handler
+    const form = document.getElementById('app-form');
+    const status = document.getElementById('app-status');
+    const output = document.getElementById('app-output');
+    const codeEl = document.getElementById('app-code');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const prompt = form.querySelector('textarea[name="prompt"]').value.trim();
+        if (!prompt) return;
+
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Building...';
+
+        status.classList.remove('hidden');
+        output.classList.add('hidden');
+
+        try {
+          const base = window.location.pathname.includes('/wevenue') ? '/wevenue' : '';
+          const res = await fetch(`${base}/api/generate`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt }),
+          });
+
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({ error: 'Generation failed' }));
+            throw new Error(err.error || `HTTP ${res.status}`);
+          }
+
+          const data = await res.json();
+          codeEl.textContent = data.code;
+          output.classList.remove('hidden');
+        } catch (err) {
+          codeEl.textContent = `Error: ${err.message}`;
+          output.classList.remove('hidden');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Build My Site ✨';
+        }
+      });
     }
   </script>
 </Layout>

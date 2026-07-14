@@ -1,18 +1,22 @@
 {
-  "name": "wevenue",
+  "name": "wevenue-app",
   "type": "module",
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "./build-css.sh && astro build",
+    "preview": "astro preview",
+    "cf:deploy": "wrangler deploy",
+    "cf:d1:init": "wrangler d1 create wevenue-db",
+    "cf:r2:init": "wrangler r2 bucket create wevenue-assets"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.6.1",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.4.4",
     "tailwindcss": "^4.3.0"
   },
-  "overrides": {
-    "vite": "^7"
+  "devDependencies": {
+    "wrangler": "^4.106.0"
   }
 }
