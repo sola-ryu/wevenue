@@ -3,6 +3,7 @@ compatibility_date = "2025-07-01"
 
 [vars]
 OPENWEBUI_URL = "https://chat.xusix.com"
+OPENWEBUI_MODEL = "qwen/qwen3.6-35b-a3b"
 
 [[d1_databases]]
 binding = "DB"

@@ -34,10 +34,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const openwebuiUrl = env.OPENWEBUI_URL || import.meta.env.OPENWEBUI_URL || 'https://chat.xusix.com';
     const apiKey = env.OPENWEBUI_API_KEY;
-
-    console.log('DEBUG: env keys:', env ? Object.keys(env) : 'no env');
-    console.log('DEBUG: apiKey present:', !!apiKey, 'length:', apiKey?.length ?? 0);
-    console.log('DEBUG: openwebuiUrl:', openwebuiUrl);
+    const model = env.OPENWEBUI_MODEL || 'qwen/qwen3.6-35b-a3b';
 
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
@@ -50,7 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
       method: 'POST',
       headers,
       body: JSON.stringify({
-        model: '',
+        model,
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
           { role: 'user', content: prompt },

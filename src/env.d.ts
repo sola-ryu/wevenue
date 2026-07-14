@@ -6,6 +6,7 @@ interface CloudflareBindings {
   wevenue: R2Bucket;
   OPENWEBUI_URL: string;
   OPENWEBUI_API_KEY: string;
+  OPENWEBUI_MODEL: string;
 }
 
 interface ImportMetaEnv {
