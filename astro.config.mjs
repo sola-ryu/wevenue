@@ -6,7 +6,11 @@ export default defineConfig({
   site: "https://sola-ryu.github.io/wevenue",
   base: "/wevenue/",
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    assets: {
+      binding: 'MY_ASSETS',
+    },
+  }),
   vite: {
     plugins: [tailwindcss()],
   },

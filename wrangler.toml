@@ -1,6 +1,5 @@
 name = "wevenue"
 compatibility_date = "2025-07-01"
-pages_build_output_dir = "dist"
 
 [vars]
 OPENWEBUI_URL = "https://chat.xusix.com"
